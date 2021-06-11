@@ -1,0 +1,36 @@
+<mat-form-field>
+   <mat-label>Filter</mat-label>
+   <input matInput (keyup)="onFilter($event)" placeholder="Ex. Mia" #input>
+</mat-form-field>
+ {{filteredSource.length}}
+<table mat-table [dataSource]="filteredSource.length ? filteredSource : dataSource" class="mat-elevation-z8">
+
+   <!--- Note that these columns can be defined in any order.
+         The actual rendered columns are set as a property on the row definition" -->
+ 
+   <!-- Position Column -->
+   <ng-container>
+      <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.date | date}} </td>
+      </ng-container>
+   
+      <!-- Name Column -->
+      <ng-container matColumnDef="ran">
+      <th mat-header-cell *matHeaderCellDef> Random Number </th>
+      <td mat-cell *matCellDef="let element"> {{element.ran | number : '1.2-2' }} </td>
+      </ng-container>
+   
+      <!-- Weight Column -->
+      <ng-container matColumnDef="clicks">
+      <th mat-header-cell *matHeaderCellDef="let element">Clicks</th>
+      <td mat-cell *matCellDef="let element"> {{element.clicks > 0 ? element.clicks : ''}} </td>
+      </ng-container>
+   
+   
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" (click)="trackClick(i)"></tr>
+   </ng-container>
+</table>
+ 
+ 
